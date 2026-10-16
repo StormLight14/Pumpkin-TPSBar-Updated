@@ -44,30 +44,30 @@ impl DisplaySnapshot {
     }
 
     pub fn title(&self) -> TextComponent {
-        let title = gray_text("TPS: ");
-        title.add_child(colored_text(&format!("{:.2}", self.tps), self.tps_severity));
-        title.add_child(gray_text("  MSPT: "));
-        title.add_child(colored_text(
+        let mut title = gray_text("TPS: ");
+        title = title.add_child(colored_text(&format!("{:.2}", self.tps), self.tps_severity));
+        title = title.add_child(gray_text("  MSPT: "));
+        title = title.add_child(colored_text(
             &format!("{:.2}", self.mspt),
             self.mspt_severity,
         ));
-        title.add_child(gray_text(" ms"));
-        title.add_child(gray_text("  PING: "));
-        title.add_child(colored_text(&self.ping.to_string(), self.ping_severity));
-        title.add_child(gray_text(" ms"));
+        title = title.add_child(gray_text(" ms"));
+        title = title.add_child(gray_text("  PING: "));
+        title = title.add_child(colored_text(&self.ping.to_string(), self.ping_severity));
+        title = title.add_child(gray_text(" ms"));
         title
     }
 }
 
 fn gray_text(text: &str) -> TextComponent {
-    let component = TextComponent::text(text);
-    component.color_named(NamedColor::Gray);
+    let mut component = TextComponent::text(text);
+    component = component.color_named(NamedColor::Gray);
     component
 }
 
 fn colored_text(text: &str, severity: Severity) -> TextComponent {
-    let component = TextComponent::text(text);
-    component.color_named(match severity {
+    let mut component = TextComponent::text(text);
+    component = component.color_named(match severity {
         Severity::Green => NamedColor::Green,
         Severity::Yellow => NamedColor::Yellow,
         Severity::Gold => NamedColor::Gold,
